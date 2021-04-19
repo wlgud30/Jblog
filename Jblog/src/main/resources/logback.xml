@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback configuration -->
+<configuration>
+	<!-- Appender : 어디에 , 어떤 로그를 기록할 것인지 설정  -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<!-- 기록할 로그의 포맷을 결정 -->
+			<Pattern>
+				%d{HH:mm:ss.SSS} %thread %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>\log-jblog\jblog.log</file>
+		<encoder>
+			<charset>UTF-8</charset>
+			<Pattern>
+				%d{HH:mm:ss.SSS} %thread %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>\log-myportal\myportal.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<logger name="com.kjh.jblog" level="DEBUG">
+		<appender-ref ref="consoleAppender"/>
+	</logger>
+	
+
+	<root level="TRACE">	
+		<appender-ref ref="fileAppender"/>
+	</root>
+</configuration>
