@@ -26,7 +26,7 @@
 			<p>로고이미지</p>
 			<div class="input-group">
 				<c:if test="${not empty blogVo.logoFile}">
-					<img width=320 height=240 class="img-thumbnail" src="/jblog/assets/img/${blogVo.logoFile }">
+					<img width=320 height=240 class="img-thumbnail" src="/jblog/upload-images/${blogVo.logoFile }">
 				</c:if>
 			</div>
 			<input type="file" value="${blogVo.logoFile }" name="uploadfile">

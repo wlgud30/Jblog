@@ -79,7 +79,7 @@
 			<div class="col-md-4">
 				<c:if test="${not empty blogVo.logoFile}">
 					<div class="p-4">
-						<img class="fst-italic" src="assets/img/${blogVo.logoFile}" style="display : block;">
+						<img class="fst-italic" src="/jblog/upload-images/${blogVo.logoFile}" style="display : block;">
 					</div>
 				</c:if>
 				<div class="p-4">
@@ -94,11 +94,5 @@
 		</div>
 		<jsp:include page="/WEB-INF/views/includes/blog_footer.jsp" />
 	</main>
-	<!--jsp:include page="/WEB-INF/views/includes/blog_header.jsp" />
-		<c:if test="${not empty blogVo.logoFile}">
-			<img src="assets/img/${blogVo.logoFile }">
-		</c:if>
-	<jsp:include page="/WEB-INF/views/includes/blog_footer.jsp" />
-	  -->
 </body>
 </html>

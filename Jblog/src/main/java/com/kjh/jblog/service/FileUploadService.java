@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileUploadService {
 
-	private static String SAVE_PATH="C:\\Users\\wlgud30\\git\\jblog\\Jblog\\src\\main\\webapp\\assets\\img";
+	private static String SAVE_PATH="E:\\upload";
 	private static Logger logger = LoggerFactory.getLogger(FileUploadService.class);
 	
 	
