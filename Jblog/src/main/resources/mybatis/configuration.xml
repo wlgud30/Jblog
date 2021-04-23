@@ -2,13 +2,19 @@
 <!DOCTYPE configuration
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!--  Mybatis 설정 -->	
 <configuration>
 	<typeAliases>
-		
+		<typeAlias alias="userVo" type="com.kjh.jblog.vo.UserVo"/>
+		<typeAlias alias="BlogVo" type="com.kjh.jblog.vo.BlogVo"/>
+		<typeAlias alias="categoryVo" type="com.kjh.jblog.vo.CategoryVo"/>
+		<typeAlias alias="postVo" type="com.kjh.jblog.vo.PostVo"/>
+		<typeAlias alias="cmtVo" type="com.kjh.jblog.vo.CommentsVo"/>
 	</typeAliases>
 	<mappers>
-		<!-- guestbook에 관련된 매퍼 설정 -->
-		
+		<mapper resource="mybatis/mappers/users.xml" />
+		<mapper resource="mybatis/mappers/blog.xml" />
+		<mapper resource="mybatis/mappers/category.xml" />
+		<mapper resource="mybatis/mappers/post.xml" />
+		<mapper resource="mybatis/mappers/cmt.xml" />
 	</mappers>
 </configuration>

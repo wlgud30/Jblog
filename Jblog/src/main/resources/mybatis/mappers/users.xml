@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<!-- id check -->
+	<select id="idCheck" parameterType="string" resultType="int">
+		<![CDATA[
+			SELECT 
+				COUNT(*)
+			FROM
+				users
+			WHERE
+				id = #{id}
+		]]>
+	</select>
+	<!-- 해당id가 가지고있는 회원번호 가져오기 -->
+	<select id="selectUserNo" parameterType="string" resultType="Long">
+		<![CDATA[
+			SELECT 
+				userNo
+			FROM
+				users
+			WHERE
+				id = #{id}
+		]]>
+	</select>
+	<!-- 회원번호로 id가져오기 -->
+	<select id="selectId" parameterType="Long" resultType="String">
+		<![CDATA[
+			SELECT 
+				id
+			FROM
+				users
+			WHERE
+				userNo = #{userNo}
+		]]>
+	</select>
+	<!-- login -->
+	<select id="login" parameterType="map" resultType="userVo">
+		<![CDATA[
+			SELECT 
+				userNo,id,userName,password,joinDate
+			FROM
+				users
+			WHERE
+				id=#{id}
+			AND
+				password=#{password}
+		]]>
+	</select>
+	<!-- userJoin -->
+	<insert id="insert2" parameterType="userVo">
+		<![CDATA[
+			INSERT INTO
+				users(userNo,id,userName,password,joinDate)
+			VALUES
+				(seq_users_no.nextval,#{id},#{userName},#{password},sysdate)
+		]]>
+		<selectKey keyProperty="userNo" resultType="Long" order="AFTER">
+			<![CDATA[ 
+				SELECT seq_users_no.currval FROM dual 
+			]]>
+		</selectKey>
+	</insert>
+	<!-- <![CDATA[]]> -->
+</mapper>

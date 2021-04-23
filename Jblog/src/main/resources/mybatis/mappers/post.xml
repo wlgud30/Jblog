@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	<select id="postList" parameterType="Long" resultType="postVo">
+		<![CDATA[
+			SELECT
+				postTitle,postNo,cateNo,regDate
+			FROM
+				post
+			WHERE
+				cateNo = #{cateNo}	
+		]]>		
+	</select>
+	
+	<select id="postOne" parameterType="Long" resultType="postVo">
+		<![CDATA[
+			SELECT
+				postTitle,PostContent,cateNo,postNo
+			FROM
+				post
+			WHERE
+				postNo = #{postNo}
+		]]>	
+	</select>
+	
+	<insert id="insert" parameterType="postVo">
+		<![CDATA[
+			INSERT INTO
+				post(postNo,cateNo,postTitle,postContent,regDate)
+			VALUES
+				(seq_post_no.nextval,#{cateNo},#{postTitle},#{postContent},sysdate)
+		]]>	
+	</insert>
+	<!-- post count 수 출력 -->
+	<select id="selectCount" parameterType="map" resultType = "postVo">
+		<![CDATA[
+			SELECT 
+				c.cateNo,cateName,nvl(cnt,0) as count,description,c.regDate
+			FROM 
+				category c 
+			LEFT JOIN 
+				(
+				SELECT
+					count(*) cnt ,cateNo  
+				FROM 
+					post 
+				WHERE 
+					cateNo is not null 
+				GROUP BY
+					cateNo
+				) b
+			ON 
+				c.cateNo = b.cateNo
+			WHERE
+                c.userNo = #{userNo}
+            AND
+            	c.cateNo = #{cateNo}
+			ORDER BY
+				c.regDate desc
+		]]>
+	</select>
+</mapper>
